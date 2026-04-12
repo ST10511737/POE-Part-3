@@ -77,7 +77,9 @@ public class Login {
         return "Password successfully captured";
     }
 
-    
+   // Regex based on ITU E.164 international numbering plan
+   // Reference: International Telecommunication Union (ITU), Recommendation E.164
+   // https://www.itu.int/rec/T-REC-E.164/en 
    public boolean checkCellPhoneNumber(String cell) {
     // + followed by 1–3 digit country code, then up to 10 digits subscriber number
         return cell.matches("\\+\\d{1,3}\\d{1,10}");
@@ -122,8 +124,6 @@ public class Login {
         return "All details successfully captured.";
     }
  
-    
-
     public boolean loginUser(String username, String password) {
         return username.equals(regUsername) && password.equals(regPassword);
     }
