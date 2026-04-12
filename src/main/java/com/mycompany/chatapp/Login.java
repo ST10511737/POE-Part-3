@@ -74,16 +74,39 @@ public class Login {
             feedback.append("*Please try again");
             return feedback.toString();
         }
-
-        // ✅ Only success if it passes the complexity check
         return "Password successfully captured";
     }
 
-    public boolean checkCellPhoneNumber(String cell) {
-        return cell.startsWith("+27") && cell.length() <= 13;
+    
+   public boolean checkCellPhoneNumber(String cell) {
+    // + followed by 1–3 digit country code, then up to 10 digits subscriber number
+        return cell.matches("\\+\\d{1,3}\\d{1,10}");
     }
+   
+   public String cellPhoneFeedback(String cell) {
+        if (cell.isEmpty()) {
+            return "*Cell phone number cannot be empty\n*Please try again";
+        }
+        if (!cell.startsWith("+")) {
+            return "*Cell phone number must start with '+' followed by country code\n*Please try again";
+        }
+        if (!cell.substring(1).matches("\\d+")) {
+            return "*Cell phone number must contain only digits after '+'\n*Please try again";
+        }
+        // Split into country code and subscriber number
+        String digits = cell.substring(1);
+        if (digits.length() <= 3) {
+            return "*Missing subscriber number after country code\n*Please try again";
+        }
+        String subscriber = digits.substring(3); // assume 1–3 digit country code
+        if (subscriber.length() > 10) {
+            return "*Subscriber number too long (maximum 10 digits)\n*Please try again";
+        }
 
-    public String registerUser(String username, String password, String cell) {
+        return "Cell phone number successfully added.";
+    }
+   
+   public String registerUser(String username, String password, String cell) {
         if (!checkUserName(username)) {
             return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
         }
@@ -98,17 +121,21 @@ public class Login {
         this.regCell = cell;
         return "All details successfully captured.";
     }
+ 
+    
 
     public boolean loginUser(String username, String password) {
         return username.equals(regUsername) && password.equals(regPassword);
     }
 
-    public String returnLoginStatus(boolean success, String firstName, String lastName) {
+    public String returnLoginStatus(boolean success, String username) {
         if (success) {
-            return "Welcome " + firstName + ", " + lastName + " - it’s great to see you again.";
-        } else {
-            return "Username or password incorrect, please try again.";
+            return "Welcome " + username + ", it is great to see you again.";
         }
+            return "Username or password incorrect, please try again.";
     }
+        
 }
+
+
 

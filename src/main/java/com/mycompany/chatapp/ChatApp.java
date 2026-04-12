@@ -75,29 +75,31 @@ public class ChatApp {
                             System.out.println(feedback);
 
                             if (login.checkPasswordComplexity(pass)) {
-                                break; // ✅ only move on when valid
+                                break; 
                             }
                         }
                         if (pass.equalsIgnoreCase("exit")) break;
 
                         // Cell number validation
                         while (true) {
-                            System.out.print("Enter cell number (+27XXXXXXXXXX): ");
+                            System.out.print("\nPlease type in your international code followed by your cellnumber\nEnter cell number (+27XXXXXXXXXX): ");
                             cell = sc.nextLine().trim();
                             if (cell.equalsIgnoreCase("exit")) {
                                 System.out.println("Returning to home page...");
                                 break;
                             }
-                            if (!cell.matches("\\+27\\d{10}")) {
-                                System.out.println("❌ Invalid cell number. Must start with +27 followed by 10 digits. Try again.");
-                            } else {
+                            String feedback = login.cellPhoneFeedback(cell);
+                            System.out.println(feedback);
+
+                            // Only move on if valid
+                            if (login.checkCellPhoneNumber(cell)) {
                                 break;
                             }
                         }
                         if (cell.equalsIgnoreCase("exit")) break;
 
                         System.out.println(login.registerUser(user, pass, cell));
-                        System.out.println("\n✅ You have successfully registered with Chatter!");
+                        System.out.println("\nYou have successfully registered with Chatter!");
                         
                         // End program after successful registration
                         running = false;
@@ -121,7 +123,7 @@ public class ChatApp {
                                 break;
                             }
                             if (loginUser.isEmpty()) {
-                                System.out.println("❌ Username cannot be empty. Try again.");
+                                System.out.println("Username cannot be empty. Try again.");
                                 continue;
                             }
 
@@ -131,16 +133,8 @@ public class ChatApp {
                                 System.out.println("Returning to home page...");
                                 break;
                             }
-
                             boolean success = login.loginUser(loginUser, loginPass);
-                            if (!success) {
-                                System.out.println("❌ Invalid credentials. Please try again.");
-                            } else {
-                                System.out.println("\n✅ Welcome back, " + loginUser + "!");
-                                // End program after successful login
-                                running = false;
-                                break;
-                            }
+                            System.out.println(login.returnLoginStatus(success, loginUser));
                         }
                         break;
 
@@ -150,7 +144,7 @@ public class ChatApp {
                         String confirm = sc.nextLine().trim().toLowerCase();
                         if (confirm.equals("y")) {
                             running = false;
-                            System.out.println("\n✅ Thank you for using Chatter. Goodbye!");
+                            System.out.println("\nThank you for using Chatter. Goodbye!");
                         } else {
                             System.out.println("\nReturning to main menu...");
                         }
