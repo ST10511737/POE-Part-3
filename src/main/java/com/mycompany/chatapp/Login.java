@@ -31,13 +31,9 @@ public class Login {
         if(username.isEmpty()){
             return "*Username cannot be empty\nPlease try again";
         }
-        if(username.contains("_") && username.length()>5){
-            return "*Username is t"
-        }
         if (checkUserName(username)) {
         return "Username successfully captured";
         }
-
          // Fallback (shouldn’t normally be reached)
         return "*Invalid username\n*Please try again";
     }
@@ -52,6 +48,35 @@ public class Login {
             else if (!Character.isLetterOrDigit(c)) special = true;
         }
         return length && capital && number && special;
+    }
+    
+    public String passwordFeedback(String password) {
+        StringBuilder feedback = new StringBuilder();
+
+        if (password.isEmpty()) {
+            return "*Password cannot be empty\n*Please try again";
+        }
+        if (password.length() < 8) {
+            feedback.append("*Password too short (minimum 8 characters)\n");
+        }
+        if (!password.chars().anyMatch(Character::isUpperCase)) {
+            feedback.append("*Password must contain at least one uppercase letter\n");
+        }
+        if (!password.chars().anyMatch(Character::isDigit)) {
+            feedback.append("*Password must contain at least one number\n");
+        }
+        if (password.chars().allMatch(Character::isLetterOrDigit)) {
+            feedback.append("*Password must contain at least one special character (e.g. !, @, #)\n");
+        }
+
+        // If we collected any problems, return them
+        if (feedback.length() > 0) {
+            feedback.append("*Please try again");
+            return feedback.toString();
+        }
+
+        // ✅ Only success if it passes the complexity check
+        return "Password successfully captured";
     }
 
     public boolean checkCellPhoneNumber(String cell) {

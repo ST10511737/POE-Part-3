@@ -57,23 +57,25 @@ public class ChatApp {
                             System.out.println(feedback);
 
                             if (feedback.equals("Username successfully captured")) {
-                                break; // ✅ only move on when valid
+                                break;
                             }
                         }
                         if (user.equalsIgnoreCase("exit")) break;
 
                         // Password validation
                         while (true) {
+                            System.out.println("\nPassword Requirmenst:\n- At least 8 Characters long\n- Contain a capiital letter\n- Contain a number\n- Contain a special character");
                             System.out.print("Enter password: ");
                             pass = sc.nextLine();
                             if (pass.equalsIgnoreCase("exit")) {
                                 System.out.println("Returning to home page...");
                                 break;
                             }
-                            if (pass.length() < 4) {
-                                System.out.println("❌ Password too short. Must be at least 4 characters. Try again.");
-                            } else {
-                                break;
+                            String feedback = login.passwordFeedback(pass);
+                            System.out.println(feedback);
+
+                            if (login.checkPasswordComplexity(pass)) {
+                                break; // ✅ only move on when valid
                             }
                         }
                         if (pass.equalsIgnoreCase("exit")) break;
