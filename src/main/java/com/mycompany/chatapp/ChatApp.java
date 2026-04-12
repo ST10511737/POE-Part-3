@@ -12,7 +12,8 @@ public class ChatApp {
         try (Scanner sc = new Scanner(System.in)) {
             Login login = new Login();
             boolean running = true;
-
+            
+            // Home page
             while (running) {
                 System.out.println("==================================");
                 System.out.println("      Hi! Welcome to Chatter.");
@@ -25,10 +26,10 @@ public class ChatApp {
                 String input = sc.nextLine().trim();
 
                 if (!input.matches("[1-3]")) {
-                    System.out.println("\n❌ Invalid option. Please select 1, 2, or 3.");
+                    System.out.println("\nInvalid option. Please select 1, 2, or 3 from the menu below.");
                     continue;
                 }
-
+                
                 int choice = Integer.parseInt(input);
 
                 switch (choice) {
@@ -46,16 +47,17 @@ public class ChatApp {
 
                         // Username validation
                         while (true) {
-                            System.out.print("\nEnter username: ");
+                            System.out.print("\nA username must contain an underscore and be no more than 5 characters long, including the underscore\nEnter username: ");
                             user = sc.nextLine().trim();
                             if (user.equalsIgnoreCase("exit")) {
                                 System.out.println("Returning to home page...");
                                 break;
                             }
-                            if (user.isEmpty()) {
-                                System.out.println("❌ Username cannot be empty. Please try again.");
-                            } else {
-                                break;
+                            String feedback = login.usernameFeedback(user);
+                            System.out.println(feedback);
+
+                            if (feedback.equals("Username successfully captured")) {
+                                break; // ✅ only move on when valid
                             }
                         }
                         if (user.equalsIgnoreCase("exit")) break;
@@ -94,6 +96,7 @@ public class ChatApp {
 
                         System.out.println(login.registerUser(user, pass, cell));
                         System.out.println("\n✅ You have successfully registered with Chatter!");
+                        
                         // End program after successful registration
                         running = false;
                         break;

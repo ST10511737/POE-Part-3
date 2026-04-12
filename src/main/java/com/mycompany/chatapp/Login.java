@@ -17,6 +17,30 @@ public class Login {
     public boolean checkUserName(String username) {
         return username.contains("_") && username.length() <= 5;
     }
+    
+    public String usernameFeedback(String username){
+        if (username.contains("_" ) && username.length()>5){
+            return "*Username is too long\n*Please try again";
+        }
+        if (!username.contains("_") && username.length()>=5){
+            return "*Username does not contain an underscore and is too long\n*Please try again";
+        }
+        if(username.length()<= 4 && !username.contains("_")){
+            return "*Username is missing an underscore\n*Please try again";
+        }
+        if(username.isEmpty()){
+            return "*Username cannot be empty\nPlease try again";
+        }
+        if(username.contains("_") && username.length()>5){
+            return "*Username is t"
+        }
+        if (checkUserName(username)) {
+        return "Username successfully captured";
+        }
+
+         // Fallback (shouldn’t normally be reached)
+        return "*Invalid username\n*Please try again";
+    }
 
     public boolean checkPasswordComplexity(String password) {
         boolean length = password.length() >= 8;
