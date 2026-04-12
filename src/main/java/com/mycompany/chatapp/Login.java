@@ -13,6 +13,7 @@ public class Login {
     private String regPassword;
     private String regCell;
 
+    
     public boolean checkUserName(String username) {
         return username.contains("_") && username.length() <= 5;
     }
