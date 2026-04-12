@@ -44,7 +44,9 @@ public class ChatApp {
                         String user;
                         String pass;
                         String cell;
-
+                        
+                        
+                        
                         // Username validation
                         while (true) {
                             System.out.print("\nA username must contain an underscore and be no more than 5 characters long, including the underscore\nEnter username: ");
