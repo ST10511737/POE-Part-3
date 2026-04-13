@@ -44,7 +44,18 @@ public class ChatApp {
                         String user;
                         String pass;
                         String cell;
+                        String name;
+                        String surname;
                         
+                        // Name
+                        System.out.print("Enter first name: ");
+                        name = sc.nextLine().trim();
+                        if (name.equalsIgnoreCase("exit")) break;
+
+                        // Surname
+                        System.out.print("Enter surname: ");
+                        surname = sc.nextLine().trim();
+                        if (surname.equalsIgnoreCase("exit")) break;
                         
                         
                         // Username validation
@@ -100,14 +111,13 @@ public class ChatApp {
                         }
                         if (cell.equalsIgnoreCase("exit")) break;
 
-                        System.out.println(login.registerUser(user, pass, cell));
+                        System.out.println(login.registerUser(user, pass, cell, name, surname));
                         System.out.println("\nYou have successfully registered with Chatter!");
+                        System.out.println("\nRedirecting...");
                         
-                        // End program after successful registration
-                        running = false;
-                        break;
-
+                        
                     case 2:
+                        
                         // Login
                         System.out.println("\n==================================");
                         System.out.println("            LOGIN");
@@ -136,7 +146,8 @@ public class ChatApp {
                                 break;
                             }
                             boolean success = login.loginUser(loginUser, loginPass);
-                            System.out.println(login.returnLoginStatus(success, loginUser));
+                            System.out.println("\n"+login.returnLoginStatus(success, loginUser));
+                            
                         }
                         break;
 

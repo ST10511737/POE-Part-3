@@ -15,14 +15,14 @@ public class LoginTest {
     @Test
     public void testUsernameCorrectlyFormattedMessage() {
         Login login = new Login();
-        String result = login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976");
-        assertEquals("Welcome <user first name>, <user last name> it is great to see you.", result);
+        String result = login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
+        assertEquals("Welcome Kyle, Smith it is great to see you.", result);
     }
 
     @Test
     public void testUsernameIncorrectlyFormattedMessage() {
         Login login = new Login();
-        String result = login.registerUser("kyle!!!!!!", "Ch&&sec@ke99!", "+27838968976");
+        String result = login.registerUser("kyle!!!!!!", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
         assertEquals("Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.", result);
     }
 
@@ -36,7 +36,7 @@ public class LoginTest {
     @Test
     public void testPasswordDoesNotMeetRequirementsMessage() {
         Login login = new Login();
-        String result = login.registerUser("kyl_1", "password", "+27838968976");
+        String result = login.registerUser("kyl_1", "password", "+27838968976", "Kyle", "Smith");
         assertEquals("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.", result);
     }
 
@@ -54,19 +54,35 @@ public class LoginTest {
         assertEquals("Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.", result);
     }
 
+    @Test
+    public void testReturnLoginStatusSuccess() {
+        Login login = new Login();
+        login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
+        boolean success = login.loginUser("kyl_1", "Ch&&sec@ke99!");
+        assertEquals("Welcome Kyle, Smith it is great to see you again.", login.returnLoginStatus(success, "kyl_1"));
+    }
+
+    @Test
+    public void testReturnLoginStatusFailure() {
+        Login login = new Login();
+        login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
+        boolean success = login.loginUser("kyl_1", "wrongPass");
+        assertEquals("Username or password incorrect, please try again.", login.returnLoginStatus(success, "kyl_1"));
+    }
+
     // ---------- assertTrue / assertFalse tests (boolean outputs) ----------
 
     @Test
     public void testLoginSuccessful() {
         Login login = new Login();
-        login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976");
+        login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
         assertTrue(login.loginUser("kyl_1", "Ch&&sec@ke99!"));
     }
 
     @Test
     public void testLoginFailed() {
         Login login = new Login();
-        login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976");
+        login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
         assertFalse(login.loginUser("kyl_1", "wrongPass"));
     }
 

@@ -4,6 +4,8 @@
  */
 package com.mycompany.chatapp;
 
+import java.util.Scanner;
+
 /**
  *
  * @author juibh
@@ -12,12 +14,15 @@ public class Login {
     private String regUsername;
     private String regPassword;
     private String regCell;
+    private String regFirstName;
+    private String regLastName;
     
-   
+    // Username validation logic adapted from assignment requirements (POE Task Document, 2026)
     public boolean checkUserName(String username) {
         return username.contains("_") && username.length() <= 5;
     }
     
+    // Feedbaack on username to enhance user friendliness
     public String usernameFeedback(String username){
         if (username.contains("_" ) && username.length()>5){
             return "*Username is too long\n*Please try again";
@@ -37,7 +42,8 @@ public class Login {
          // Fallback (shouldn’t normally be reached)
         return "*Invalid username\n*Please try again";
     }
-
+    
+    // Password complexity rules adapted from Oracle Java documentation and general security guidelines (Oracle, 2026)
     public boolean checkPasswordComplexity(String password) {
         boolean length = password.length() >= 8;
         boolean capital = false, number = false, special = false;
@@ -50,7 +56,9 @@ public class Login {
         return length && capital && number && special;
     }
     
+    // Feedbaack on password complexity to enhance user friendliness
     public String passwordFeedback(String password) {
+        // StringBuilder used for efficient string concatenation (Oracle, 2026)
         StringBuilder feedback = new StringBuilder();
 
         if (password.isEmpty()) {
@@ -77,14 +85,16 @@ public class Login {
         return "Password successfully captured.";
     }
 
+   // Phone number validation logic adapted from assignment requirements (POE Task Document, 2026)
    // Regex based on ITU E.164 international numbering plan
    // Reference: International Telecommunication Union (ITU), Recommendation E.164
    // https://www.itu.int/rec/T-REC-E.164/en 
    public boolean checkCellPhoneNumber(String cell) {
     // + followed by 1–3 digit country code, then up to 10 digits subscriber number
-        return cell.matches("\\+\\d{1,3}\\d{1,10}");
+        return cell.matches("\\+\\d{1,3}\\d{10}");
     }
    
+   // Feedback on cell phone number
    public String cellPhoneFeedback(String cell) {
         // If the number is valid, return success
         if (checkCellPhoneNumber(cell)) {
@@ -94,7 +104,8 @@ public class Login {
         return "Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.";
     }
    
-   public String registerUser(String username, String password, String cell) {
+   // registerUser validation logic adapted from assignment requirements (POE Task Document, 2026)
+   public String registerUser(String username, String password, String cell, String name, String surname) {
         if (!checkUserName(username)) {
             return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
         }
@@ -107,20 +118,25 @@ public class Login {
         this.regUsername = username;
         this.regPassword = password;
         this.regCell = cell;
-        return "Welcome <user first name>, <user last name> it is great to see you.";
+        this.regFirstName = name;
+        this.regLastName = surname;
+        return "Welcome "+name + ", "+surname+" it is great to see you.";
     }
  
+   // loginUser validation logic adapted from assignment requirements (POE Task Document, 2026)
     public boolean loginUser(String username, String password) {
         return username.equals(regUsername) && password.equals(regPassword);
     }
 
+    //  returnLoginStatus validation logic adapted from assignment requirements (POE Task Document, 2026)
     public String returnLoginStatus(boolean success, String username) {
         if (success) {
-            return "Welcome <user last name> it is great to see you.";
+            return "Welcome "+regFirstName+", "+regLastName+" it is great to see you again.";
         }
             return "Username or password incorrect, please try again.";
     }
         
+    
 }
 
 
