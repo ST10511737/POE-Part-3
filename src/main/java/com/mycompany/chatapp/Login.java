@@ -4,8 +4,6 @@
  */
 package com.mycompany.chatapp;
 
-import java.util.Scanner;
-
 /**
  *
  * @author juibh
@@ -20,6 +18,15 @@ public class Login {
     // Username validation logic adapted from assignment requirements (POE Task Document, 2026)
     public boolean checkUserName(String username) {
         return username.contains("_") && username.length() <= 5;
+    }
+    
+    public String formatName(String input) {
+        // Only allow letters
+        if (!input.matches("[a-zA-Z]+")) {
+            return null; // invalid input
+        }
+        // Capitalize first letter, lowercase the rest
+        return input.substring(0,1).toUpperCase() + input.substring(1).toLowerCase();
     }
     
     // Feedbaack on username to enhance user friendliness
@@ -38,6 +45,9 @@ public class Login {
         }
         if (checkUserName(username)) {
         return "Username successfully captured";
+        }
+        if((!username.contains("_") && username.length()<=5)){
+            return "*Invalid username\n*Please try again";
         }
          // Fallback (shouldn’t normally be reached)
         return "*Invalid username\n*Please try again";

@@ -41,21 +41,41 @@ public class ChatApp {
                         System.out.println("Please fill in the following details to get started!");
                         System.out.println("(Type 'exit' at any prompt to return to the home page)");
 
-                        String user;
-                        String pass;
-                        String cell;
-                        String name;
-                        String surname;
+                        String user = "";
+                        String pass="";
+                        String cell="";
+                        String name="";
+                        String surname="";
                         
-                        // Name
-                        System.out.print("Enter first name: ");
-                        name = sc.nextLine().trim();
-                        if (name.equalsIgnoreCase("exit")) break;
+                       // First name validation
+                        while (true) {
+                            System.out.print("Enter first name: ");
+                            String rawName = sc.nextLine().trim();
+                            if (rawName.equalsIgnoreCase("exit")) break;
 
-                        // Surname
-                        System.out.print("Enter surname: ");
-                        surname = sc.nextLine().trim();
-                        if (surname.equalsIgnoreCase("exit")) break;
+                            String formatted = login.formatName(rawName);
+                            if (formatted != null) {
+                                name = formatted;
+                                break;
+                            } else {
+                                System.out.println("Invalid name. Only letters allowed. Try again or type 'exit'.");
+                            }
+                        }
+
+                        // Surname validation
+                        while (true) {
+                            System.out.print("Enter surname: ");
+                            String rawSurname = sc.nextLine().trim();
+                            if (rawSurname.equalsIgnoreCase("exit")) break;
+
+                            String formatted = login.formatName(rawSurname);
+                            if (formatted != null) {
+                                surname = formatted;
+                                break;
+                            } else {
+                                System.out.println("Invalid surname. Only letters allowed. Try again or type 'exit'.");
+                            }
+                        }
                         
                         
                         // Username validation
@@ -113,7 +133,6 @@ public class ChatApp {
 
                         System.out.println(login.registerUser(user, pass, cell, name, surname));
                         System.out.println("\nYou have successfully registered with Chatter!");
-                        System.out.println("\nRedirecting...");
                         
                         
                     case 2:
@@ -125,7 +144,7 @@ public class ChatApp {
                         System.out.println("(Type 'exit' at any prompt to return to the home page)");
 
                         String loginUser;
-                        String loginPass;
+                        String loginPass = "";
 
                         while (true) {
                             System.out.print("Enter username: ");
@@ -145,11 +164,15 @@ public class ChatApp {
                                 System.out.println("Returning to home page...");
                                 break;
                             }
-                            boolean success = login.loginUser(loginUser, loginPass);
-                            System.out.println("\n"+login.returnLoginStatus(success, loginUser));
-                            
+                            boolean success = login.loginUser(loginUser, loginPass);                           
+                            System.out.println("\n"+login.returnLoginStatus(success, loginUser));   
+                            // Once loging succeeds it will take the user to the message page which will be completed in Part 2 of the POE
+                            if (success) {
+                                System.out.println("\nYou are now logged in. Welcome to Chatter!");
+                                break; // exit loop once login succeeds
+                            }
                         }
-                        break;
+                        
 
                     case 3:
                         // Exit confirmation
