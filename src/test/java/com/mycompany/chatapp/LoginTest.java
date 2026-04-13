@@ -11,7 +11,41 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class LoginTest {
     // ---------- assertEquals tests (string outputs) ----------
+    @Test
+    public void testFormatNameValidLowercase() {
+        Login login = new Login();
+        String result = login.formatName("jui");
+        assertEquals("Jui", result);
+    }
 
+    @Test
+    public void testFormatNameValidUppercase() {
+        Login login = new Login();
+        String result = login.formatName("JUI");
+        assertEquals("Jui", result);
+    }
+
+    @Test
+    public void testFormatNameMixedCase() {
+        Login login = new Login();
+        String result = login.formatName("jUiBh");
+        assertEquals("Juibh", result);
+    }
+
+    @Test
+    public void testFormatNameInvalidCharacters() {
+        Login login = new Login();
+        String result = login.formatName("jui123");
+        assertNull(result); // invalid, contains numbers
+    }
+
+    @Test
+    public void testFormatNameEmptyString() {
+        Login login = new Login();
+        String result = login.formatName("");
+        assertNull(result); // invalid, empty input
+    }
+    
     @Test
     public void testUsernameCorrectlyFormattedMessage() {
         Login login = new Login();
