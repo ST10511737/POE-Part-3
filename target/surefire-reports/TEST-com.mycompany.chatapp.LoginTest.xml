@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.chatapp.LoginTest" time="0.137" tests="21" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.chatapp.LoginTest" time="0.142" tests="21" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ZA"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-1.8\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\juibh\AppData\Local\Temp\surefire5989370344996145865\surefirebooter-20260413174841707_3.jar C:\Users\juibh\AppData\Local\Temp\surefire5989370344996145865 2026-04-13T17-48-40_476-jvmRun1 surefire-20260413174841707_1tmp surefire_0-20260413174841707_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\juibh\AppData\Local\Temp\surefire4354755792767598704\surefirebooter-20260414181551310_3.jar C:\Users\juibh\AppData\Local\Temp\surefire4354755792767598704 2026-04-14T18-15-50_041-jvmRun1 surefire-20260414181551310_1tmp surefire_0-20260414181551310_2tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\juibh\OneDrive\Documents\NetBeansProjects\ChatApp\target\test-classes;C:\Users\juibh\OneDrive\Documents\NetBeansProjects\ChatApp\target\classes;C:\Users\juibh\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\juibh\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\juibh\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\juibh\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\juibh\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\juibh\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\juibh\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\juibh\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\juibh"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\juibh\AppData\Local\Temp\surefire5989370344996145865\surefirebooter-20260413174841707_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\juibh\AppData\Local\Temp\surefire4354755792767598704\surefirebooter-20260414181551310_3.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk-1.8\jre\lib\resources.jar;C:\Program Files\Java\jdk-1.8\jre\lib\rt.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jsse.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jce.jar;C:\Program Files\Java\jdk-1.8\jre\lib\charsets.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jfr.jar;C:\Program Files\Java\jdk-1.8\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -62,24 +62,24 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testCellPhoneCorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0.053"/>
-  <testcase name="testUsernameIncorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
+  <testcase name="testCellPhoneCorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0.047"/>
+  <testcase name="testUsernameIncorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0.003"/>
   <testcase name="testFormatNameEmptyString" classname="com.mycompany.chatapp.LoginTest" time="0.002"/>
-  <testcase name="testCellPhoneIncorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
+  <testcase name="testCellPhoneIncorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0.002"/>
   <testcase name="testReturnLoginStatusSuccess" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
-  <testcase name="testFormatNameValidLowercase" classname="com.mycompany.chatapp.LoginTest" time="0.002"/>
+  <testcase name="testFormatNameValidLowercase" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
   <testcase name="testLoginFailed" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
   <testcase name="testPasswordMeetsRequirementsBoolean" classname="com.mycompany.chatapp.LoginTest" time="0.002"/>
   <testcase name="testReturnLoginStatusFailure" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
   <testcase name="testCellPhoneIncorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
-  <testcase name="testFormatNameMixedCase" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
-  <testcase name="testLoginSuccessful" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
-  <testcase name="testFormatNameValidUppercase" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
-  <testcase name="testUsernameCorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0"/>
+  <testcase name="testFormatNameMixedCase" classname="com.mycompany.chatapp.LoginTest" time="0.002"/>
+  <testcase name="testLoginSuccessful" classname="com.mycompany.chatapp.LoginTest" time="0"/>
+  <testcase name="testFormatNameValidUppercase" classname="com.mycompany.chatapp.LoginTest" time="0"/>
+  <testcase name="testUsernameCorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0.002"/>
   <testcase name="testPasswordDoesNotMeetRequirementsBoolean" classname="com.mycompany.chatapp.LoginTest" time="0"/>
   <testcase name="testCellPhoneCorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
   <testcase name="testUsernameIncorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
-  <testcase name="testPasswordMeetsRequirementsMessage" classname="com.mycompany.chatapp.LoginTest" time="0.006"/>
+  <testcase name="testPasswordMeetsRequirementsMessage" classname="com.mycompany.chatapp.LoginTest" time="0.005"/>
   <testcase name="testUsernameCorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
   <testcase name="testPasswordDoesNotMeetRequirementsMessage" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
   <testcase name="testFormatNameInvalidCharacters" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
