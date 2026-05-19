@@ -200,9 +200,43 @@ public class ChatApp {
 
                             if (success) {
                                 System.out.println("You are now logged in. Welcome to Chatter!\n");
-                                System.out.println("Part 2 of POE to follow.\n");
-                                running = false; // terminate program after successful login
-                                break;
+                                boolean chatRunning = true;
+                                Message message = new Message();
+
+                                while (chatRunning) {
+                                    System.out.println("\nWelcome to QuickChat.");
+                                    System.out.println("1. Send Messages");
+                                    System.out.println("2. Show Recently Sent Messages");
+                                    System.out.println("3. Quit");
+                                    System.out.print("Choose option: ");
+                                    int chatChoice = sc.nextInt();
+                                    sc.nextLine();
+
+                                    switch (chatChoice) {
+                                        case 1:
+                                            System.out.print("How many messages do you want to send? ");
+                                            int num = sc.nextInt();
+                                            sc.nextLine();
+                                            for (int i = 1; i <= num; i++) {
+                                                message.sendMessage(i);
+                                            }
+                                            System.out.println("Total messages sent: " + message.returnTotalMessages());
+                                            break;
+
+                                        case 2:
+                                            System.out.println("Coming Soon.");
+                                            break;
+
+                                        case 3:
+                                            chatRunning = false;
+                                            System.out.println("Exiting QuickChat... Goodbye!");
+                                            break;
+
+                                        default:
+                                            System.out.println("Invalid choice.");
+                                    }
+                                }
+                                    break;
                             }
                         }
                         break; // end case 2, return to home page if not successful
