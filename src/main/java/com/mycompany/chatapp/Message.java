@@ -42,16 +42,16 @@ public class Message {
 
         System.out.print("Enter recipient number (+27...): ");
         String cell = sc.nextLine();
-        System.out.print("Enter message (max 250 chars): ");
+        System.out.print("\nEnter message (max 250 chars): ");
         String message = sc.nextLine();
 
         if (message.length() > 250) {
-            System.out.println("Message exceeds 250 characters by " + (message.length() - 250) + "; please reduce the size.");
+            System.out.println("\nMessage exceeds 250 characters by " + (message.length() - 250) + "; please reduce the size.");
             return;
         }
 
         String hash = createMessageHash(id, num, message);
-        System.out.println("Message Hash: " + hash);
+        System.out.println("\nMessage Hash: " + hash);
 
         System.out.println("Choose option:\n1. Send Message\n2. Disregard Message\n3. Store Message");
         int choice = sc.nextInt();

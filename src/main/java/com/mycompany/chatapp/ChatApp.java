@@ -204,24 +204,47 @@ public class ChatApp {
                                 Message message = new Message();
 
                                 while (chatRunning) {
-                                    System.out.println("\nWelcome to QuickChat.");
-                                    System.out.println("1. Send Messages");
+                                    System.out.println("\n==================================");
+                                    System.out.println("        \nWelcome to QuickChat.");
+                                    System.out.println("==================================");
+                                    
+                                    System.out.println("\n1. Send Messages");
                                     System.out.println("2. Show Recently Sent Messages");
                                     System.out.println("3. Quit");
-                                    System.out.print("Choose option: ");
-                                    int chatChoice = sc.nextInt();
-                                    sc.nextLine();
+                                    System.out.print("\nChoose option: ");
+                                    String chatChoice = sc.nextLine();
+                                    
+                                    if (!chatChoice.matches("[1-3]")) {
+                                        System.out.println("\nInvalid option. Please select 1, 2, or 3 from the menu below.\n");
+                                        continue;
+                                    }
+                                    
+                                     int option = Integer.parseInt(chatChoice);
+                                    
 
-                                    switch (chatChoice) {
+                                    switch (option) {
                                         case 1:
+                                            while (true){
                                             System.out.print("How many messages do you want to send? ");
-                                            int num = sc.nextInt();
-                                            sc.nextLine();
-                                            for (int i = 1; i <= num; i++) {
+                                            String num = sc.nextLine().trim();
+                                            
+                                            if (num.equalsIgnoreCase("exit")) {
+                                                System.out.println("\nReturning to home page...\n");
+                                                break; // exit login
+                                            }
+                                            if (num.trim().isEmpty()) {
+                                                System.out.println("\nThis field cannot be empty. Try again.\n");
+                                                continue;
+                                            }
+
+                                            int msg = Integer.parseInt(num);
+                                            for (int i = 1; i <= msg; i++) {
                                                 message.sendMessage(i);
                                             }
                                             System.out.println("Total messages sent: " + message.returnTotalMessages());
+                                            
                                             break;
+                                            }
 
                                         case 2:
                                             System.out.println("Coming Soon.");
