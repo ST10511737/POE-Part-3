@@ -1,5 +1,6 @@
 package com.mycompany.chatapp;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ChatApp {
@@ -202,7 +203,9 @@ public class ChatApp {
                                 System.out.println("You are now logged in. Welcome to Chatter!\n");
                                 boolean chatRunning = true;
                                 Message message = new Message();
-
+                                
+                                List<Message> allMessages = Message.loadMessages();
+                                
                                 while (chatRunning) {
                                     System.out.println("\n==================================");
                                     System.out.println("        \nWelcome to QuickChat.");
@@ -223,14 +226,14 @@ public class ChatApp {
                                     
 
                                     switch (option) {
-                                        case 1:
-                                            while (true){
+                                    case 1:
+                                        while (true) {
                                             System.out.print("How many messages do you want to send? ");
                                             String num = sc.nextLine().trim();
-                                            
+
                                             if (num.equalsIgnoreCase("exit")) {
                                                 System.out.println("\nReturning to home page...\n");
-                                                break; // exit login
+                                                break; // exit send loop
                                             }
                                             if (num.trim().isEmpty()) {
                                                 System.out.println("\nThis field cannot be empty. Try again.\n");
@@ -239,27 +242,38 @@ public class ChatApp {
 
                                             int msg = Integer.parseInt(num);
                                             for (int i = 1; i <= msg; i++) {
-                                                message.sendMessage(i);
+                                                // Use the helper method in Message class
+                                                Message newMsg = message.createFromInput(i);
+
+                                                // Only save if not disregarded
+                                                if (newMsg != null) {
+                                                    allMessages.add(newMsg);
+                                                }
                                             }
+
+                                            // Save all messages to JSON
+                                            Message.saveMessages(allMessages);
+
                                             System.out.println("Total messages sent: " + message.returnTotalMessages());
-                                            
+                                            System.out.println("Messages saved to JSON file!");
                                             break;
-                                            }
+                                        }
+                                        break;
 
-                                        case 2:
-                                            System.out.println("Coming Soon.");
-                                            break;
+                                    case 2:
+                                        System.out.println("Coming Soon.");
+                                        break;
 
-                                        case 3:
-                                            chatRunning = false;
-                                            System.out.println("Exiting QuickChat... Goodbye!");
-                                            break;
+                                    case 3:
+                                        chatRunning = false;
+                                        System.out.println("Exiting QuickChat... Goodbye!");
+                                        break;
 
-                                        default:
-                                            System.out.println("Invalid choice.");
-                                    }
+                                    default:
+                                        System.out.println("Invalid choice.");
                                 }
-                                    break;
+                            }
+                            break;
                             }
                         }
                         break; // end case 2, return to home page if not successful
