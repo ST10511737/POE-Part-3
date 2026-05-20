@@ -208,7 +208,7 @@ public class ChatApp {
                                 
                                 while (chatRunning) {
                                     System.out.println("\n==================================");
-                                    System.out.println("        \nWelcome to QuickChat.");
+                                    System.out.println("        Welcome to Chatter");
                                     System.out.println("==================================");
                                     
                                     System.out.println("\n1. Send Messages");
@@ -228,7 +228,7 @@ public class ChatApp {
                                     switch (option) {
                                     case 1:
                                         while (true) {
-                                            System.out.print("How many messages do you want to send? ");
+                                            System.out.print("\nHow many messages do you want to send? ");
                                             String num = sc.nextLine().trim();
 
                                             if (num.equalsIgnoreCase("exit")) {
@@ -254,8 +254,9 @@ public class ChatApp {
                                             // Save all messages to JSON
                                             Message.saveMessages(allMessages);
 
-                                            System.out.println("Total messages sent: " + message.returnTotalMessages());
-                                            System.out.println("Messages saved to JSON file!");
+                                            System.out.println("Total messages sent/stored: " + Message.returnTotalMessages());
+                                            
+                                            
                                             break;
                                         }
                                         break;
@@ -266,7 +267,7 @@ public class ChatApp {
 
                                     case 3:
                                         chatRunning = false;
-                                        System.out.println("Exiting QuickChat... Goodbye!");
+                                        System.out.println("Exiting Chatter... Goodbye!");
                                         break;
 
                                     default:

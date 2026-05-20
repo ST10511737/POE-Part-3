@@ -1,159 +1,146 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.chatapp;
-
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Message {
-    private int id;
+    private long id;              // 10-digit random ID
     private String recipient;
     private String text;
-    private int totalMessages = 0;
+    private String hash;          // message hash
+    private static int totalMessages = 0; // batch counter
 
     // Needed for Gson
     public Message() {}
 
-    public Message(int id, String recipient, String text) {
+    public Message(long id, String recipient, String text, String hash) {
         this.id = id;
         this.recipient = recipient;
         this.text = text;
+        this.hash = hash;
     }
 
-    // Getters and setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
+    // Getters
+    public long getId() { return id; }
     public String getRecipient() { return recipient; }
-    public void setRecipient(String recipient) { this.recipient = recipient; }
-
     public String getText() { return text; }
-    public void setText(String text) { this.text = text; }
+    public String getHash() { return hash; }
 
-    // Check that message ID is no longer than 10 characters
-    public boolean checkMessageID(String id) {
-        return id.length() <= 10;
+    // Reset counter per batch
+    public static void resetTotalMessages() {
+        totalMessages = 0;
     }
 
-    // Validate recipient cell number
-    public String checkRecipientCell(String cell) {
-        if (cell.startsWith("+27") && cell.length() <= 13) {
-            return "Cell phone number successfully captured.";
-        } else {
-            return "Cell phone number incorrectly formatted or does not contain an international code.";
-        }
+    // Return total messages sent/stored
+    public static int returnTotalMessages() {
+        return totalMessages;
+    }
+
+    // Validate recipient cell number (South Africa format only)
+    public boolean checkRecipientCell(String cell) {
+        return cell.matches("\\+27\\d{9}");
     }
 
     // Create a message hash using ID, message number, and first/last words
-    public String createMessageHash(String id, int num, String message) {
-        String[] words = message.split(" ");
+    public String createMessageHash(long id, int num, String message) {
+        String[] words = message.trim().split("\\s+");
         String first = words[0].toUpperCase();
         String last = words[words.length - 1].toUpperCase();
-        return id.substring(0, 2) + ":" + num + ":" + first + last;
+        String idStr = String.valueOf(id);
+        return idStr.substring(0, 2) + ":" + num + ":" + first + last;
     }
 
-    // Send a message with options and save to JSON
-    public void sendMessage(int num) {
-        Scanner sc = new Scanner(System.in);
-        String idStr = String.valueOf((int)(Math.random() * 1000000000));
-
-        System.out.print("Enter recipient number (+27...): ");
-        String cell = sc.nextLine();
-        System.out.print("\nEnter message (max 250 chars): ");
-        String message = sc.nextLine();
-
-        if (message.length() > 250) {
-            System.out.println("\nMessage exceeds 250 characters by " + (message.length() - 250) + "; please reduce the size.");
-            return;
-        }
-
-        String hash = createMessageHash(idStr, num, message);
-        System.out.println("\nMessage Hash: " + hash);
-
-        System.out.println("Choose option:\n1. Send Message\n2. Disregard Message\n3. Store Message");
-        int choice = sc.nextInt();
-        sc.nextLine();
-
-        switch (choice) {
-            case 1:
-                System.out.println("Message successfully sent.");
-                totalMessages++;
-                break;
-            case 2:
-                System.out.println("Message disregarded.");
-                return;
-            case 3:
-                System.out.println("Message successfully stored.");
-                totalMessages++;
-                break;
-            default:
-                System.out.println("Invalid choice.");
-               
-        }
-
-    }
-
-    // Return total messages sent
-    public int returnTotalMessages() {
-        return totalMessages;
-    }
-    
-    // prompt user and return a Message object
+    // Prompt user and return a Message object (for JSON saving)
     public Message createFromInput(int num) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter recipient number (+27...): ");
-        String cell = sc.nextLine();
-
-        System.out.print("\nEnter message (max 250 chars): ");
-        String messageText = sc.nextLine();
-
-        if (messageText.length() > 250) {
-            System.out.println("\nMessage exceeds 250 characters by " + (messageText.length() - 250) + "; please reduce the size.");
-            return null;
-        }
-
-        System.out.println("Choose option:\n1. Send Message\n2. Disregard Message\n3. Store Message");
-        int choice = sc.nextInt();
-        sc.nextLine();
-
-        if (choice == 2) {
-            System.out.println("Message disregarded.");
-            return null; // don’t save
-        }
-
-        System.out.println("Message successfully processed.");
-        return new Message(num, cell, messageText); // return actual message
-    }
-    
-    // Save messages to JSON
-        public static void saveMessages(List<Message> messages) {
-            try (FileWriter writer = new FileWriter("src/main/resources/messages.json")) {
-                Gson gson = new Gson();
-                gson.toJson(messages, writer);
-            } catch (IOException e) {
-                System.out.println("Error saving messages: " + e.getMessage());
+        // Recipient loop
+        String cell;
+        while (true) {
+            System.out.print("\nEnter recipient number (+27... or type 'exit' to cancel): ");
+            cell = sc.nextLine().trim();
+            if (cell.equalsIgnoreCase("exit")) {
+                return null; // clean exit
+            }
+            if (checkRecipientCell(cell)) {
+                break;
+            } else {
+                System.out.println("Invalid cell number. Must be +27 followed by 9 digits. Try again.");
             }
         }
+
+        // Message loop
+        String messageText;
+        while (true) {
+            System.out.print("\nEnter message (max 250 chars or type 'exit' to cancel): ");
+            messageText = sc.nextLine();
+            if (messageText.equalsIgnoreCase("exit")) {
+                return null; // clean exit
+            }
+            if (messageText.length() <= 250) {
+                break;
+            } else {
+                System.out.println("Message too long. Reduce size and try again.");
+            }
+        }
+
+        // Choice loop
+        while (true) {
+            System.out.println("Choose option:\n1. Send Message\n0. Disregard/Delete Message\n3. Store Message\n(type 'exit' to cancel)");
+            String choiceStr = sc.nextLine().trim();
+            if (choiceStr.equalsIgnoreCase("exit")) {
+                return null; // clean exit
+            }
+            if (!choiceStr.matches("[0-3]")) {
+                System.out.println("Invalid choice. Try again.");
+                continue;
+            }
+            int choice = Integer.parseInt(choiceStr);
+
+            if (choice == 0) {
+                System.out.println("Message disregarded and deleted.");
+                return null;
+            } else {
+                // Generate unique 10-digit ID
+                long id = (long)(Math.random() * 9000000000L) + 1000000000L;
+                String hash = createMessageHash(id, num, messageText);
+
+                System.out.println("\nMessage successfully processed.");
+                System.out.println("Message ID: " + id);
+                System.out.println("Message Hash: " + hash);
+                System.out.println("Recipient: " + cell);
+                System.out.println("Message: " + messageText);
+
+                totalMessages++;
+                return new Message(id, cell, messageText, hash);
+            }
+        }
+    }
+
+    // Save messages to JSON
+    public static void saveMessages(List<Message> messages) {
+        try (FileWriter writer = new FileWriter("src/main/resources/messages.json")) {
+            Gson gson = new Gson();
+            gson.toJson(messages, writer);
+        } catch (IOException e) {
+            System.out.println("Error saving messages: " + e.getMessage());
+        }
+    }
 
     // Load messages from JSON
-        public static List<Message> loadMessages() {
-            try (FileReader reader = new FileReader("src/main/resources/messages.json")) {
-                Gson gson = new Gson();
-                java.lang.reflect.Type listType = new TypeToken<ArrayList<Message>>() {}.getType();
-                return gson.fromJson(reader, listType);
-            } catch (IOException e) {
-                return new ArrayList<>(); // return empty list if file not found
-            }
+    public static List<Message> loadMessages() {
+        try (FileReader reader = new FileReader("src/main/resources/messages.json")) {
+            Gson gson = new Gson();
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<Message>>() {}.getType();
+            return gson.fromJson(reader, listType);
+        } catch (IOException e) {
+            return new ArrayList<>(); // return empty list if file not found
         }
+    }
 }
