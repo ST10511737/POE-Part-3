@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.chatapp.LoginTest" time="0.11" tests="21" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.chatapp.MessageTest" time="0.046" tests="12" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -62,25 +62,16 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testCellPhoneCorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0.048"/>
-  <testcase name="testUsernameIncorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testFormatNameEmptyString" classname="com.mycompany.chatapp.LoginTest" time="0.004"/>
-  <testcase name="testCellPhoneIncorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testReturnLoginStatusSuccess" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testFormatNameValidLowercase" classname="com.mycompany.chatapp.LoginTest" time="0.001"/>
-  <testcase name="testLoginFailed" classname="com.mycompany.chatapp.LoginTest" time="0.002"/>
-  <testcase name="testPasswordMeetsRequirementsBoolean" classname="com.mycompany.chatapp.LoginTest" time="0.004"/>
-  <testcase name="testReturnLoginStatusFailure" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testCellPhoneIncorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testFormatNameMixedCase" classname="com.mycompany.chatapp.LoginTest" time="0.004"/>
-  <testcase name="testLoginSuccessful" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testFormatNameValidUppercase" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testUsernameCorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testPasswordDoesNotMeetRequirementsBoolean" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testCellPhoneCorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0.003"/>
-  <testcase name="testUsernameIncorrectlyFormattedBoolean" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testPasswordMeetsRequirementsMessage" classname="com.mycompany.chatapp.LoginTest" time="0.004"/>
-  <testcase name="testUsernameCorrectlyFormattedMessage" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testPasswordDoesNotMeetRequirementsMessage" classname="com.mycompany.chatapp.LoginTest" time="0"/>
-  <testcase name="testFormatNameInvalidCharacters" classname="com.mycompany.chatapp.LoginTest" time="0"/>
+  <testcase name="testRecipientFailure" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
+  <testcase name="testMessageIDInvalid" classname="com.mycompany.chatapp.MessageTest" time="0.004"/>
+  <testcase name="testTotalMessagesCounter" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
+  <testcase name="testSendMessageOptionStore" classname="com.mycompany.chatapp.MessageTest" time="0"/>
+  <testcase name="testMessageIDValid" classname="com.mycompany.chatapp.MessageTest" time="0"/>
+  <testcase name="testMessageLengthSuccess" classname="com.mycompany.chatapp.MessageTest" time="0"/>
+  <testcase name="testMessageHashCorrect" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
+  <testcase name="testMessageLengthFailure" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
+  <testcase name="testSendMessageOptionSend" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
+  <testcase name="testRecipientSuccess" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
+  <testcase name="testSendMessageOptionDisregard" classname="com.mycompany.chatapp.MessageTest" time="0"/>
+  <testcase name="testMessageHashWithValidMessage2" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
 </testsuite>

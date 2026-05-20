@@ -42,12 +42,17 @@ public class Message {
         return totalMessages;
     }
 
-    // Validate recipient cell number (South Africa format only)
+    //Check that message ID is no longer than 10 characters
+    public boolean checkMessageID(String id) {
+        return id.length() <= 10;
+    }
+
+    //Validate recipient cell number (South Africa format only)
     public boolean checkRecipientCell(String cell) {
         return cell.matches("\\+27\\d{9}");
     }
 
-    // Create a message hash using ID, message number, and first/last words
+    //Create a message hash using ID, message number, and first/last words
     public String createMessageHash(long id, int num, String message) {
         String[] words = message.trim().split("\\s+");
         String first = words[0].toUpperCase();
@@ -56,18 +61,15 @@ public class Message {
         return idStr.substring(0, 2) + ":" + num + ":" + first + last;
     }
 
-    // Prompt user and return a Message object (for JSON saving)
+    //Prompt user and return a Message object (for JSON saving)
     public Message createFromInput(int num) {
         Scanner sc = new Scanner(System.in);
 
         // Recipient loop
         String cell;
         while (true) {
-            System.out.print("\nEnter recipient number (+27... or type 'exit' to cancel): ");
+            System.out.print("\nEnter recipient number (+27XXXXXXXXX): ");
             cell = sc.nextLine().trim();
-            if (cell.equalsIgnoreCase("exit")) {
-                return null; // clean exit
-            }
             if (checkRecipientCell(cell)) {
                 break;
             } else {
@@ -78,11 +80,8 @@ public class Message {
         // Message loop
         String messageText;
         while (true) {
-            System.out.print("\nEnter message (max 250 chars or type 'exit' to cancel): ");
+            System.out.print("\nEnter message (max 250 chars): ");
             messageText = sc.nextLine();
-            if (messageText.equalsIgnoreCase("exit")) {
-                return null; // clean exit
-            }
             if (messageText.length() <= 250) {
                 break;
             } else {
@@ -92,11 +91,8 @@ public class Message {
 
         // Choice loop
         while (true) {
-            System.out.println("Choose option:\n1. Send Message\n0. Disregard/Delete Message\n3. Store Message\n(type 'exit' to cancel)");
+            System.out.println("Choose option:\n1. Send Message\n0. Disregard/Delete Message\n3. Store Message");
             String choiceStr = sc.nextLine().trim();
-            if (choiceStr.equalsIgnoreCase("exit")) {
-                return null; // clean exit
-            }
             if (!choiceStr.matches("[0-3]")) {
                 System.out.println("Invalid choice. Try again.");
                 continue;
@@ -105,10 +101,18 @@ public class Message {
 
             if (choice == 0) {
                 System.out.println("Message disregarded and deleted.");
+                // ✅ Reset counter to zero if discarded
+                resetTotalMessages();
+                System.out.println("Total messages sent: 0");
                 return null;
             } else {
                 // Generate unique 10-digit ID
                 long id = (long)(Math.random() * 9000000000L) + 1000000000L;
+                String idStr = String.valueOf(id);
+                if (!checkMessageID(idStr)) {
+                    System.out.println("Generated ID invalid (too long).");
+                    return null;
+                }
                 String hash = createMessageHash(id, num, messageText);
 
                 System.out.println("\nMessage successfully processed.");
@@ -118,12 +122,13 @@ public class Message {
                 System.out.println("Message: " + messageText);
 
                 totalMessages++;
+                System.out.println("Total messages sent: " + totalMessages);
                 return new Message(id, cell, messageText, hash);
             }
         }
     }
 
-    // Save messages to JSON
+    //Save messages to JSON
     public static void saveMessages(List<Message> messages) {
         try (FileWriter writer = new FileWriter("src/main/resources/messages.json")) {
             Gson gson = new Gson();
@@ -133,7 +138,7 @@ public class Message {
         }
     }
 
-    // Load messages from JSON
+    //Load messages from JSON
     public static List<Message> loadMessages() {
         try (FileReader reader = new FileReader("src/main/resources/messages.json")) {
             Gson gson = new Gson();
