@@ -200,82 +200,67 @@ public class ChatApp {
                             System.out.println("\n" + login.returnLoginStatus(success, loginUser) + "\n");   
 
                             if (success) {
-                                System.out.println("You are now logged in. Welcome to Chatter!\n");
-                                boolean chatRunning = true;
-                                Message message = new Message();
-                                
-                                List<Message> allMessages = Message.loadMessages();
-                                
-                                while (chatRunning) {
-                                    System.out.println("\n==================================");
-                                    System.out.println("        Welcome to Chatter");
-                                    System.out.println("==================================");
-                                    
-                                    System.out.println("\n1. Send Messages");
-                                    System.out.println("2. Show Recently Sent Messages");
-                                    System.out.println("3. Quit");
-                                    System.out.print("\nChoose option: ");
-                                    String chatChoice = sc.nextLine();
-                                    
-                                    if (!chatChoice.matches("[1-3]")) {
-                                        System.out.println("\nInvalid option. Please select 1, 2, or 3 from the menu below.\n");
-                                        continue;
-                                    }
-                                    
-                                     int option = Integer.parseInt(chatChoice);
-                                    
+                        System.out.println("You are now logged in. Welcome to Chatter!\n");
+                        boolean chatRunning = true;
 
-                                    switch (option) {
-                                    case 1:
-                                        while (true) {
-                                            System.out.print("\nHow many messages do you want to send? ");
-                                            String num = sc.nextLine().trim();
+                        List<Message> allMessages = Message.loadMessages();
 
-                                            if (num.equalsIgnoreCase("exit")) {
-                                                System.out.println("\nReturning to home page...\n");
-                                                break; // exit send loop
-                                            }
-                                            if (num.trim().isEmpty()) {
-                                                System.out.println("\nThis field cannot be empty. Try again.\n");
-                                                continue;
-                                            }
+                        while (chatRunning) {
+                            System.out.println("\n==================================");
+                            System.out.println("        Welcome to Chatter");
+                            System.out.println("==================================");
 
-                                            int msg = Integer.parseInt(num);
-                                            for (int i = 1; i <= msg; i++) {
-                                                // Use the helper method in Message class
-                                                Message newMsg = message.createFromInput(i);
+                            System.out.println("\n1. Send Messages");
+                            System.out.println("2. Show Recently Sent Messages");
+                            System.out.println("3. Quit");
+                            System.out.println("4. Stored Messages");
+                            System.out.print("\nChoose option: ");
+                            String chatChoice = sc.nextLine();
 
-                                                // Only save if not disregarded
-                                                if (newMsg != null) {
-                                                    allMessages.add(newMsg);
-                                                }
-                                            }
+                            if (!chatChoice.matches("[1-4]")) {
+                                System.out.println("\nInvalid option. Please select 1, 2, 3 or 4 from the menu below.\n");
+                                continue;
+                            }
 
-                                            // Save all messages to JSON
-                                            Message.saveMessages(allMessages);
+                            int option = Integer.parseInt(chatChoice);
 
-                                            System.out.println("Total messages sent/stored: " + Message.returnTotalMessages());
-                                            
-                                            
-                                            break;
+                            switch (option) {
+                                case 1:
+                                    System.out.print("\nHow many messages do you want to send? ");
+                                    String num = sc.nextLine().trim();
+                                    int msgCount = Integer.parseInt(num);
+
+                                    for (int i = 1; i <= msgCount; i++) {
+                                        // Use the helper method in Message class
+                                        Message newMsg = new StoredMessages().createFromInput(i);
+
+
+                                        if (newMsg != null) {
+                                            allMessages.add(newMsg);
                                         }
-                                        break;
+                                    }
 
-                                    case 2:
-                                        System.out.println("Coming Soon.");
-                                        break;
+                                    Message.saveMessages(allMessages);
+                                    System.out.println("Total messages sent/stored: " + Message.returnTotalMessages());
+                                    break;
 
-                                    case 3:
-                                        chatRunning = false;
-                                        System.out.println("Exiting Chatter... Goodbye!");
-                                        break;
+                                case 2:
+                                    System.out.println("Coming Soon.");
+                                    break;
 
-                                    default:
-                                        System.out.println("Invalid choice.");
-                                }
+                                case 3:
+                                    chatRunning = false;
+                                    System.out.println("Exiting Chatter... Goodbye!");
+                                    break;
+
+                                case 4:
+                                    StoredMessages stored = new StoredMessages();
+                                    stored.storedMessagesMenu(sc);
+                                    break;
                             }
-                            break;
-                            }
+                        }
+                    }
+
                         }
                         break; // end case 2, return to home page if not successful
 

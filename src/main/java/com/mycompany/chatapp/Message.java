@@ -17,7 +17,7 @@ public class Message {
     private static int totalMessages = 0; // batch counter
 
     // Needed for Gson
-    public Message() {}
+    public Message(String id1, String hash1, String sender, String recipient1, String text1, String sent) {}
 
     public Message(long id, String recipient, String text, String hash) {
         this.id = id;
@@ -147,5 +147,10 @@ public class Message {
         } catch (IOException e) {
             return new ArrayList<>(); // return empty list if file not found
         }
+    }
+
+    
+    String getSender() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -32,13 +32,13 @@ public class MessageTest {
     // ---------- Recipient Validation Tests ----------
     @Test
     public void testRecipientSuccess() {
-        Message msg = new Message();
+        Message msg = new Message(id, hash, sender, recipient, text, "Sent");
         assertTrue(msg.checkRecipientCell(validRecipient1), "Cell phone number successfully captured.");
     }
 
     @Test
     public void testRecipientFailure() {
-        Message msg = new Message();
+        Message msg = new Message(id, hash, sender, recipient, text, "Sent");
         assertFalse(msg.checkRecipientCell(invalidRecipient1),
                 "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.");
     }
@@ -46,7 +46,7 @@ public class MessageTest {
     // ---------- Message Hash Tests ----------
     @Test
     public void testMessageHashWithValidMessage2() {
-        Message msg = new Message();
+        Message msg = new Message(id, hash, sender, recipient, text, "Sent");
         long id = 9876543210L;
         String hash = msg.createMessageHash(id, 2, validMessage2);
         assertEquals("98:2:HIPAYMENT?", hash);
@@ -55,7 +55,7 @@ public class MessageTest {
     
     @Test
     public void testMessageHashCorrect() {
-        Message msg = new Message();
+        Message msg = new Message(id, hash, sender, recipient, text, "Sent");
         long id = 1234567890L;
         String hash = msg.createMessageHash(id, 0, "Hi tonight");
         assertEquals("12:0:HITONIGHT", hash, "Message hash should match POE format.");
@@ -64,13 +64,13 @@ public class MessageTest {
     // ---------- Message ID Tests ----------
     @Test
     public void testMessageIDValid() {
-        Message msg = new Message();
+        Message msg = new Message(id, hash, sender, recipient, text, "Sent");
         assertTrue(msg.checkMessageID("1234567890"), "Message ID generated: <Message ID>");
     }
 
     @Test
     public void testMessageIDInvalid() {
-        Message msg = new Message();
+        Message msg = new Message(id, hash, sender, recipient, text, "Sent");
         assertFalse(msg.checkMessageID("12345678901"), "Message ID should not exceed 10 characters.");
     }
 

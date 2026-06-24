@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.chatapp.MessageTest" time="0.046" tests="12" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.chatapp.MessageTest" time="0.061" tests="12" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ZA"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-1.8\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\juibh\AppData\Local\Temp\surefire4707936395772553582\surefirebooter-20260520231216036_3.jar C:\Users\juibh\AppData\Local\Temp\surefire4707936395772553582 2026-05-20T23-12-15_005-jvmRun1 surefire-20260520231216036_1tmp surefire_0-20260520231216036_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\juibh\AppData\Local\Temp\surefire2910348788052956463\surefirebooter-20260520233121308_3.jar C:\Users\juibh\AppData\Local\Temp\surefire2910348788052956463 2026-05-20T23-31-20_046-jvmRun1 surefire-20260520233121308_1tmp surefire_0-20260520233121308_2tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\juibh\OneDrive\Documents\NetBeansProjects\ChatApp\target\test-classes;C:\Users\juibh\OneDrive\Documents\NetBeansProjects\ChatApp\target\classes;C:\Users\juibh\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\juibh\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\juibh\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\juibh\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\juibh\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\juibh\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\juibh\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\juibh\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\juibh\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\juibh"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\juibh\AppData\Local\Temp\surefire4707936395772553582\surefirebooter-20260520231216036_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\juibh\AppData\Local\Temp\surefire2910348788052956463\surefirebooter-20260520233121308_3.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk-1.8\jre\lib\resources.jar;C:\Program Files\Java\jdk-1.8\jre\lib\rt.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jsse.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jce.jar;C:\Program Files\Java\jdk-1.8\jre\lib\charsets.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jfr.jar;C:\Program Files\Java\jdk-1.8\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -62,16 +62,16 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testRecipientFailure" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
-  <testcase name="testMessageIDInvalid" classname="com.mycompany.chatapp.MessageTest" time="0.004"/>
-  <testcase name="testTotalMessagesCounter" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
-  <testcase name="testSendMessageOptionStore" classname="com.mycompany.chatapp.MessageTest" time="0"/>
-  <testcase name="testMessageIDValid" classname="com.mycompany.chatapp.MessageTest" time="0"/>
-  <testcase name="testMessageLengthSuccess" classname="com.mycompany.chatapp.MessageTest" time="0"/>
-  <testcase name="testMessageHashCorrect" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
-  <testcase name="testMessageLengthFailure" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
-  <testcase name="testSendMessageOptionSend" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
-  <testcase name="testRecipientSuccess" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
-  <testcase name="testSendMessageOptionDisregard" classname="com.mycompany.chatapp.MessageTest" time="0"/>
+  <testcase name="testRecipientFailure" classname="com.mycompany.chatapp.MessageTest" time="0.003"/>
+  <testcase name="testMessageIDInvalid" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
+  <testcase name="testTotalMessagesCounter" classname="com.mycompany.chatapp.MessageTest" time="0.001"/>
+  <testcase name="testSendMessageOptionStore" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
+  <testcase name="testMessageIDValid" classname="com.mycompany.chatapp.MessageTest" time="0.001"/>
+  <testcase name="testMessageLengthSuccess" classname="com.mycompany.chatapp.MessageTest" time="0.001"/>
+  <testcase name="testMessageHashCorrect" classname="com.mycompany.chatapp.MessageTest" time="0.001"/>
+  <testcase name="testMessageLengthFailure" classname="com.mycompany.chatapp.MessageTest" time="0.001"/>
+  <testcase name="testSendMessageOptionSend" classname="com.mycompany.chatapp.MessageTest" time="0.001"/>
+  <testcase name="testRecipientSuccess" classname="com.mycompany.chatapp.MessageTest" time="0.003"/>
+  <testcase name="testSendMessageOptionDisregard" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
   <testcase name="testMessageHashWithValidMessage2" classname="com.mycompany.chatapp.MessageTest" time="0.002"/>
 </testsuite>
